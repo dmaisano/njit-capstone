@@ -1,0 +1,26 @@
+{
+  "name": "njit-capstone",
+  "version": "1.0.0",
+  "description": "CS491 Capstone Project",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "serve:docs": "vuepress dev docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmaisano/njit-capstone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmaisano/njit-capstone/issues"
+  },
+  "homepage": "https://github.com/dmaisano/njit-capstone#readme",
+  "devDependencies": {
+    "vuepress": "^1.1.0"
+  }
+}
