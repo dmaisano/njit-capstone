@@ -1,3 +1,5 @@
 # NJIT CS-491 Capstone Project
 
-[Docs](https://njit-ups-capstone.netlify.com/)
+## Documentation
+
+[Vuepress Wiki](https://njit-ups-capstone.netlify.com/)
