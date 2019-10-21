@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,13 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using RRSS.API.Models;
 using RRSS.API.Services;
 
 using MongoDB.Driver;
 using MongoDB.Bson;
-using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace RRSS.API
 {
@@ -49,14 +51,20 @@ namespace RRSS.API
         if (airportsCollection.AsQueryable().Count() < 1)
         {
           // TODO: possibly make this task async
-          List<Site> airports = File.ReadAllLines("./data/airports.csv").Skip(1).Select(line => new Site(line)).ToList();
+          // using (StreamReader file = File.OpenText("./data/airports.json"))
+          // using (JsonTextReader reader = new JsonTextReader(file))
+          // {
+          //   JObject o2 = (JObject)JToken.ReadFrom(reader);
+          // }
 
-          airportsCollection.InsertMany(airports);
+          // List<Site> airports = File.ReadAllLines("./data/airports.csv", Encoding.UTF8).Skip(1).Select(line => new Site(line)).ToList();
+
+          // airportsCollection.InsertMany(airports);
         }
       }
-      catch
+      catch (Exception e)
       {
-        System.Console.WriteLine("====FAILED TO CONNECT TO MONGODB====");
+        System.Console.WriteLine(e);
         System.Environment.Exit(-1);
       }
     }
