@@ -47,19 +47,15 @@ namespace RRSS.API
 
         var airportsCollection = db.GetCollection<Site>(collectionName);
 
-        // no documents in collection
-        if (airportsCollection.AsQueryable().Count() < 1)
+        // no documents in collection or CLI flag was passed
+        if (airportsCollection.AsQueryable().Count() < 1 || configuration["mongodb:force"] == "true")
         {
+          System.Console.WriteLine("===Inserting data from \"./data/airports.json\" into MongoDB collection===");
           // TODO: possibly make this task async
-          // using (StreamReader file = File.OpenText("./data/airports.json"))
-          // using (JsonTextReader reader = new JsonTextReader(file))
-          // {
-          //   JObject o2 = (JObject)JToken.ReadFrom(reader);
-          // }
+          string jsonTxt = File.ReadAllText("./data/airports.json", Encoding.UTF8);
+          var records = JsonConvert.DeserializeObject<List<Site>>(jsonTxt);
 
-          // List<Site> airports = File.ReadAllLines("./data/airports.csv", Encoding.UTF8).Skip(1).Select(line => new Site(line)).ToList();
-
-          // airportsCollection.InsertMany(airports);
+          airportsCollection.InsertMany(records);
         }
       }
       catch (Exception e)
