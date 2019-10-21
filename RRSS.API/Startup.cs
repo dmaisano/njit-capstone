@@ -65,6 +65,8 @@ namespace RRSS.API
       }
     }
 
+    readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
     public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
@@ -80,6 +82,15 @@ namespace RRSS.API
       services.AddSingleton<SitesService>();
 
       services.AddControllers();
+
+      services.AddCors(options =>
+        {
+          options.AddPolicy(MyAllowSpecificOrigins,
+          builder =>
+          {
+            builder.WithOrigins("http://localhost:4200");
+          });
+        });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,6 +100,8 @@ namespace RRSS.API
       {
         app.UseDeveloperExceptionPage();
       }
+
+      app.UseCors(MyAllowSpecificOrigins);
 
       // app.UseHttpsRedirection();
 

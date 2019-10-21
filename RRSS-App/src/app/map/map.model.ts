@@ -10,7 +10,8 @@ export interface IGeoJson {
   $key?: string;
 }
 
-export class GeoJson implements IGeoJson {
+// Site conforms to the GeoJSON spec
+export class Site implements IGeoJson {
   type = "Feature";
   geometry: IGeometry;
 
@@ -22,8 +23,8 @@ export class GeoJson implements IGeoJson {
   }
 }
 
-export class FeatureCollection {
+export class SiteCollection {
   type: "FeatureCollection";
 
-  constructor(public features: Array<GeoJson>) {}
+  constructor(public features: Site[]) {}
 }

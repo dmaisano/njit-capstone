@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  api: {
+    url: "http://localhost:5000/api",
+  },
   mapbox: {
     accessToken:
       "pk.eyJ1IjoiZG1haXNhbm9vbyIsImEiOiJjazBwaXFpdXAwbHlqM2Jtc2NmdzB4NDNrIn0.D69q0MaJq02spQlDvEziVA",

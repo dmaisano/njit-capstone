@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import * as mapboxgl from "mapbox-gl";
-import { MapService } from "../map.service";
+import { MapService } from "./map.service";
+import { Site } from "./map.model";
 import { environment } from "src/environments/environment";
+import { log } from "util";
 
 @Component({
   selector: "app-map",
@@ -14,11 +16,20 @@ export class MapComponent implements OnInit {
   // style = "mapbox://styles/mapbox/outdoors-v9";
   lat = 40.742789;
   lng = -74.179771;
+  sites: Site[];
 
-  constructor(private mapService: MapService) {}
+  constructor(private mapService: MapService) {
+    (mapboxgl as typeof mapboxgl).accessToken = environment.mapbox.accessToken;
+  }
 
   ngOnInit() {
     this.buildMap();
+
+    this.mapService.getSites().subscribe({
+      next: (sites) => {
+        console.log(sites);
+      },
+    });
   }
 
   buildMap() {
