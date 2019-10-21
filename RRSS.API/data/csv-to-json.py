@@ -22,8 +22,8 @@ reader = DictReader(
 )
 
 data = []
-
 for row in reader:
     data.append(row)
 
-jsonFile.write(dumps(data, indent=2, separators=(",", ": "), ensure_ascii=False))
+jsonFile.write(dumps(data, ensure_ascii=False))
+# jsonFile.write(dumps(data, indent=2, separators=(",", ": "), ensure_ascii=False))
